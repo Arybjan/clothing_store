@@ -1,14 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
+from .managers import UserManager
 
 
-class User(models.Model):
+class User(AbstractBaseUser):
     name = models.CharField(_("Имя"), max_length=50)
     email = models.EmailField(_("Почта"), unique=True)
-    birthday_date = models.DateField(_("Год рождения"), auto_now=True)
-    genders = models.ForeignKey("users.Genders", on_delete=models.SET_NULL, null=True)
-    created_at = models.DateTimeField(_("Время создания"), auto_now=True)
 
+    objects = UserManager
 
-class Genders(models.Model):
-    title = models.CharField(_("Пол"), max_length=20)
+    USERNAME_FIELD = "email"
+
+    class Meta:
+        verbose_name = _("Пользователь")
+        verbose_name_plural = _("Пользователи")
