@@ -1,3 +1,5 @@
 .env
 .vscode
 /__pycache__/
+store/__pycache__/
+users/__pycache__/
