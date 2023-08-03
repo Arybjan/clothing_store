@@ -4,7 +4,7 @@ from .serializers import LoginSerializer, CreateUserSerializer, ListUserSerializ
 from .models import User
 from django.contrib.auth.hashers import check_password
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 import jwt
 
@@ -12,6 +12,7 @@ import jwt
 class ListUsersAPIView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = ListUserSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class RegisterViewSet(generics.CreateAPIView):

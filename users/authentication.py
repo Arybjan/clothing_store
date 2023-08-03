@@ -20,8 +20,8 @@ class JWTAuthentication(BaseAuthentication):
         else:
             if self.prefix.lower() != prefix.decode().lower():
                 raise exceptions.AuthenticationFailed(msg)
-            payload = jwt.decode(value, key=settings.SECRET_KEY)
-            email = payload.get("emaial")
+            payload = jwt.decode(value, algorithms=["HS256"],key=settings.SECRET_KEY)
+            email = payload.get("email")
             try:
                 user = User.objects.get(email=email)
             except User.DoesNotExist:

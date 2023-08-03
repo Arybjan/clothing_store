@@ -21,7 +21,11 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
 
-class ListUserSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    email = serializers.EmailField()
-    password = serializers.CharField()
+class ListUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+    # name = serializers.CharField()
+    # email = serializers.EmailField()
+    # password = serializers.CharField()
