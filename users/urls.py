@@ -4,7 +4,8 @@ from users import views
 
 
 router = DefaultRouter()
-router.register("users", views.UserViewSet)
 urlpatterns = [
-    path("api-auth", views.LoginAPIView.as_view()),
-] + router.urls
+    path("obtain-token/", views.LoginAPIView.as_view(), name="obtain-token"),
+    path("register/", views.RegisterViewSet.as_view(), name="register"),
+    path("list-users/", views.ListUsersAPIView.as_view(), name="list-user"),
+]

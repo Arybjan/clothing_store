@@ -1,21 +1,29 @@
-from rest_framework import generics, viewsets
+from rest_framework import generics
 from django.conf import settings
-from .serializers import LoginSerializer, CreateUserSerializer
+from .serializers import LoginSerializer, CreateUserSerializer, ListUserSerializer
 from .models import User
 from django.contrib.auth.hashers import check_password
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework import status
 import jwt
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class ListUsersAPIView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = ListUserSerializer
+
+
+class RegisterViewSet(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = CreateUserSerializer
+    permission_classes = [AllowAny]
+
 
 class LoginAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -38,5 +46,5 @@ class LoginAPIView(generics.CreateAPIView):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        token = jwt.encode(payload={"email": user.email}, key=settings.SEKRET_KEY)
-        return Response
+        token = jwt.encode(payload={"email": user.email}, key=settings.SECRET_KEY)
+        return Response(data={"token": token})
