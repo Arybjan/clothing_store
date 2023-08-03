@@ -9,7 +9,7 @@ from rest_framework import status
 import jwt
 
 
-class ListUsersAPIView(generics.ListAPIView):
+class ListUsersAPIView(generics.ListAPIView): 
     queryset = User.objects.all()
     serializer_class = ListUserSerializer
     permission_classes = [IsAuthenticated]
