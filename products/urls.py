@@ -12,4 +12,19 @@ urlpatterns = [
         views.DecsriptionProductAPIView.as_view(),
         name="add-description",
     ),
+    path(
+        "add-favorite-list/",
+        views.FavoriteProductAPIView.as_view(),
+        name="add-favorite-list",
+    ),
+    path(
+        "update-list-favorite-product/<int:pk>/",
+        views.UpdateFavoriteProductAPIView.as_view(),
+        name="update-list-favorite-product",
+    ),
+    path(
+        "list-favorite-product/",
+        views.ListFavoriteProductAPIView.as_view(),
+        name="list-favorite-product",
+    ),
 ]

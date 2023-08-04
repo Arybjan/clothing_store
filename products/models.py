@@ -13,3 +13,8 @@ class Product(models.Model):
 class DescriptionProduct(models.Model):
     description_text = models.TextField(_("Описание"))
     created_at = models.DateTimeField(_("Дата создания"), auto_now_add=True)
+
+
+class FavoriteProducts(models.Model):
+    products = models.ForeignKey("products.Product", on_delete=models.CASCADE)
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
