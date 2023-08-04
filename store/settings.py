@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     # external apps
     "users",
+    "products",
 
     # install apps
     "rest_framework",
