@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 
     # install apps
     "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
